@@ -1,0 +1,129 @@
+from fischertechnik.controller.Motor import Motor
+from lib.camera import *
+from lib.controller import *
+from lib.display import *
+ 
+SP = None
+error = None
+error_pas = None
+suma_error = None
+Kp = None
+Ki = None
+Kd = None
+Correcion = None
+Velocidad = None
+counter = None
+ 
+ 
+def color_callback(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback2(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback3(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback4(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback5(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback6(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback7(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback8(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback9(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+def color_callback10(event):
+    global SP, error, error_pas, suma_error, Kp, Ki, Kd, Correcion, Velocidad, counter
+    if event.value.compare(hex="#3c884d", hue_tolerance=40) == True:
+        SP = -20
+    elif event.value.compare(hex="#b02418", hue_tolerance=40) == True:
+        SP = 20
+ 
+ 
+color_detector.add_detection_listener(color_callback)
+color_detector5.add_detection_listener(color_callback2)
+color_detector434.add_detection_listener(color_callback3)
+color_detector6.add_detection_listener(color_callback4)
+color_detector2.add_detection_listener(color_callback5)
+color_detector7.add_detection_listener(color_callback6)
+color_detector4.add_detection_listener(color_callback7)
+color_detector42.add_detection_listener(color_callback8)
+color_detector3.add_detection_listener(color_callback9)
+color_detector43.add_detection_listener(color_callback10)
+ 
+ 
+SP = 0
+error = 0
+error_pas = 0
+suma_error = 0
+Kp = 2.3
+Ki = 0
+Kd = 30
+Correcion = 0
+Velocidad = 512
+counter = 0
+while True:
+    error = SP - (TXT_M_I1_ultrasonic_distance_meter.get_distance() - TXT_M_I3_ultrasonic_distance_meter.get_distance())
+    suma_error = (suma_error if isinstance(suma_error, (int, float)) else 0) + error
+    Correcion = min(max(Kp * error + (Kd * (error - error_pas) + Ki * suma_error), -100), 100)
+    TXT_M_S1_servomotor.set_position(int(256 + Correcion))
+    TXT_M_M1_encodermotor.set_speed(int(Velocidad), Motor.CW)
+    TXT_M_M1_encodermotor.start()
+    error_pas = error
+    counter = TXT_M_C1_motor_step_counter.get_count()
+    display.set_attr("txt_label.text", str(counter))
