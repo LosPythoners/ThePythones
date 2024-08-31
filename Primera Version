@@ -1,0 +1,46 @@
+import time
+
+from lib.controller import *
+ 
+x = None
+ 
+ 
+while not x == 4:
+
+    while not (TXT_M_I2_ultrasonic_distance_meter.get_distance() <= 30):
+
+        if TXT_M_I1_ultrasonic_distance_meter.get_distance() == 8:
+
+            TXT_M_S1_servomotor.set_position(int(253))
+
+            TXT_M_O2_unidirectional_motor.set_speed(int(400))
+
+        elif TXT_M_I1_ultrasonic_distance_meter.get_distance() < 8:
+
+            TXT_M_S1_servomotor.set_position(int(283))
+
+            TXT_M_O2_unidirectional_motor.set_speed(int(400))
+
+        elif TXT_M_I1_ultrasonic_distance_meter.get_distance() > 8:
+
+            TXT_M_S1_servomotor.set_position(int(213))
+
+            TXT_M_O2_unidirectional_motor.set_speed(int(400))
+
+    TXT_M_S1_servomotor.set_position(int(398))
+
+    TXT_M_O2_unidirectional_motor.set_speed(int(400))
+
+    while True:
+
+        if (TXT_M_I2_ultrasonic_distance_meter.get_distance() > 48):
+
+            break
+
+        time.sleep(0.010)
+
+    x = (x if isinstance(x, (int, float)) else 0) + 1
+
+TXT_M_O1_unidirectional_motor.stop()
+
+ 
