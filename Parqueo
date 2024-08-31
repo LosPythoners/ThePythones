@@ -1,0 +1,37 @@
+import math
+import time
+from fischertechnik.controller.Motor import Motor
+from lib.controller import *
+ 
+disttancia = None
+m_impulso = None
+counter = None
+ 
+ 
+m_impulso = 0.0017246
+counter = TXT_M_C1_motor_step_counter.get_count()
+TXT_M_S1_servomotor.set_position(int(370))
+TXT_M_M1_encodermotor.set_speed(int(140), Motor.CCW)
+TXT_M_M1_encodermotor.start()
+while True:
+    if (math.fabs(TXT_M_C1_motor_step_counter.get_count()) > 140 + counter):
+        break
+    time.sleep(0.010)
+TXT_M_M1_encodermotor.stop()
+TXT_M_S1_servomotor.set_position(int(114))
+counter = TXT_M_C1_motor_step_counter.get_count()
+TXT_M_M1_encodermotor.set_speed(int(200), Motor.CCW)
+TXT_M_M1_encodermotor.start()
+while True:
+    if (math.fabs(TXT_M_C1_motor_step_counter.get_count()) > 40 + counter):
+        break
+    time.sleep(0.010)
+TXT_M_M1_encodermotor.stop()
+counter = TXT_M_C1_motor_step_counter.get_count()
+TXT_M_S1_servomotor.set_position(int(330))
+TXT_M_M1_encodermotor.set_speed(int(200), Motor.CW)
+TXT_M_M1_encodermotor.start()
+while True:
+    if (math.fabs(TXT_M_C1_motor_step_counter.get_count()) > 40 + counter):
+        break
+    time.sleep(0.010)
