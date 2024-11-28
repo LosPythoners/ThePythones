@@ -1,0 +1,319 @@
+import math
+import time
+from fischertechnik.controller.Motor import Motor
+from lib.camera import *
+from lib.controller import *
+from lib.display import *
+
+red = None
+SP = None
+error = None
+green = None
+suma_error = None
+blue = None
+Cambio_Negativo = None
+Correcion = None
+red2 = None
+Cambio_Positivo = None
+counter2 = None
+green2 = None
+tolerance_3 = None
+Velocidad = None
+blue2 = None
+tolerance_2 = None
+tolerance_1 = None
+counter1 = None
+black = None
+Kp = None
+Kd = None
+Ki = None
+error_pas = None
+counter = None
+m_impulso = None
+distancia = None
+
+
+def color_callback(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback2(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback3(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback4(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback5(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback6(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback7(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback8(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback9(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback10(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback11(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback12(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback13(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback14(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback15(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback16(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback17(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def color_callback18(event):
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    if event.value.get_rgb_red() < red + tolerance_3 and event.value.get_rgb_green() < green + tolerance_2 and event.value.get_rgb_blue() > blue - tolerance_1:
+        SP = Cambio_Negativo
+    if event.value.get_rgb_red() < red2 + tolerance_1 and event.value.get_rgb_green() < green2 + tolerance_3 and event.value.get_rgb_blue() > blue2 - tolerance_2:
+        SP = Cambio_Positivo
+
+
+def Parking():
+    global red, SP, error, green, suma_error, blue, Cambio_Negativo, Correcion, red2, Cambio_Positivo, counter2, green2, tolerance_3, Velocidad, blue2, tolerance_2, tolerance_1, counter1, black, Kp, Kd, Ki, error_pas, counter, m_impulso, distancia
+    TXT_M_S1_servomotor.set_position(int(256))
+    while not counter2 == 2:
+        if TXT_M_I1_ultrasonic_distance_meter.get_distance() < 30:
+            counter2 = (counter2 if isinstance(counter2, (int, float)) else 0) + 1
+            time.sleep(1)
+        TXT_M_M1_encodermotor.set_speed(int(400), Motor.CW)
+        TXT_M_M1_encodermotor.start()
+    TXT_M_M1_encodermotor.stop()
+    TXT_M_M1_encodermotor.set_speed(int(400), Motor.CW)
+    TXT_M_M1_encodermotor.start()
+    time.sleep(0.3)
+    counter1 = TXT_M_C1_motor_step_counter.get_count()
+    TXT_M_S1_servomotor.set_position(int(400))
+    TXT_M_M1_encodermotor.set_speed(int(220), Motor.CCW)
+    TXT_M_M1_encodermotor.start()
+    while True:
+        if ((TXT_M_C1_motor_step_counter.get_count()) > math.fabs(140 + counter1)):
+            break
+        time.sleep(0.010)
+    TXT_M_M1_encodermotor.stop()
+    TXT_M_S1_servomotor.set_position(int(120))
+    counter1 = TXT_M_C1_motor_step_counter.get_count()
+    TXT_M_M1_encodermotor.set_speed(int(200), Motor.CCW)
+    TXT_M_M1_encodermotor.start()
+    while True:
+        if ((TXT_M_C1_motor_step_counter.get_count()) > math.fabs(1 + counter1)):
+            break
+        time.sleep(0.010)
+    TXT_M_M1_encodermotor.stop()
+    counter1 = TXT_M_C1_motor_step_counter.get_count()
+    TXT_M_S1_servomotor.set_position(int(260))
+    TXT_M_M1_encodermotor.set_speed(int(90), Motor.CCW)
+    TXT_M_M1_encodermotor.start()
+    while True:
+        if ((TXT_M_C1_motor_step_counter.get_count()) > math.fabs(1 + counter1)):
+            break
+        time.sleep(0.010)
+    TXT_M_M1_encodermotor.stop()
+
+
+color_detector.add_detection_listener(color_callback)
+color_detector22222.add_detection_listener(color_callback2)
+color_detector2222226.add_detection_listener(color_callback3)
+color_detector.add_detection_listener(color_callback4)
+color_detector222222.add_detection_listener(color_callback5)
+color_detector2222227.add_detection_listener(color_callback6)
+color_detector2.add_detection_listener(color_callback7)
+color_detector2222222.add_detection_listener(color_callback8)
+color_detector2222228.add_detection_listener(color_callback9)
+color_detector22.add_detection_listener(color_callback10)
+color_detector2222223.add_detection_listener(color_callback11)
+color_detector2222229.add_detection_listener(color_callback12)
+color_detector222.add_detection_listener(color_callback13)
+color_detector2222224.add_detection_listener(color_callback14)
+color_detector22222210.add_detection_listener(color_callback15)
+color_detector2222.add_detection_listener(color_callback16)
+color_detector2222225.add_detection_listener(color_callback17)
+color_detector22222211.add_detection_listener(color_callback18)
+
+
+red = 238
+green = 39
+blue = 55
+red2 = 16
+green2 = 79
+blue2 = 97
+black = 15
+tolerance_3 = 10
+tolerance_2 = 50
+tolerance_1 = 100
+SP = -40
+error = 0
+error_pas = 0
+suma_error = 0
+Kp = 2.3
+Ki = 0
+Kd = 30
+Correcion = 0
+Velocidad = 450
+m_impulso = 0.00172746
+distancia = round(19.7 / m_impulso)
+counter = 0
+Cambio_Negativo = -30
+Cambio_Positivo = 30
+TXT_M_I2C_1_gesture_sensor.enable_light()
+while not counter > distancia:
+    error = SP - (TXT_M_I1_ultrasonic_distance_meter.get_distance() - TXT_M_I2_ultrasonic_distance_meter.get_distance())
+    suma_error = (suma_error if isinstance(suma_error, (int, float)) else 0) + error
+    Correcion = min(max(Kp * error + (Kd * (error - error_pas) + Ki * suma_error), -80), 80)
+    if TXT_M_I3_ultrasonic_distance_meter.get_distance() < 40:
+        Velocidad = min(max(30 * (TXT_M_I3_ultrasonic_distance_meter.get_distance() - 5), 150), 450)
+    else:
+        Velocidad = 450
+    if TXT_M_I2_ultrasonic_distance_meter.get_distance() < 30:
+        Correcion = (Correcion if isinstance(Correcion, (int, float)) else 0) + -90
+    if TXT_M_I1_ultrasonic_distance_meter.get_distance() < 30:
+        Correcion = (Correcion if isinstance(Correcion, (int, float)) else 0) + 90
+    if TXT_M_I4_color_sensor.get_voltage() < red + tolerance_3 and TXT_M_I4_color_sensor.get_voltage() < green + tolerance_2 and TXT_M_I4_color_sensor.get_voltage() > blue - tolerance_1:
+        SP = -30
+    if TXT_M_I4_color_sensor.get_voltage() < red2 + tolerance_1 and TXT_M_I4_color_sensor.get_voltage() < green2 + tolerance_3 and TXT_M_I4_color_sensor.get_voltage() > blue2 - tolerance_2:
+        SP = 30
+    if TXT_M_I3_ultrasonic_distance_meter.get_distance() < 20:
+        if (TXT_M_I2C_1_gesture_sensor.get_rgb_green()) + (TXT_M_I2C_1_gesture_sensor.get_rgb_blue()) < (TXT_M_I2C_1_gesture_sensor.get_rgb_red()) * 1.5:
+            TXT_M_S1_servomotor.set_position(int(128))
+            TXT_M_M1_encodermotor.set_speed(int(512), Motor.CW)
+            TXT_M_M1_encodermotor.start()
+            time.sleep(0.4)
+            TXT_M_M1_encodermotor.set_speed(int(0), Motor.CW)
+            TXT_M_M1_encodermotor.start()
+            TXT_M_S1_servomotor.set_position(int(256))
+        if (TXT_M_I2C_1_gesture_sensor.get_rgb_green()) + (TXT_M_I2C_1_gesture_sensor.get_rgb_blue()) > (TXT_M_I2C_1_gesture_sensor.get_rgb_red()) * 1.5:
+            TXT_M_S1_servomotor.set_position(int(384))
+            TXT_M_M1_encodermotor.set_speed(int(512), Motor.CW)
+            TXT_M_M1_encodermotor.start()
+            time.sleep(0.4)
+            TXT_M_M1_encodermotor.set_speed(int(0), Motor.CW)
+            TXT_M_M1_encodermotor.start()
+            TXT_M_S1_servomotor.set_position(int(256))
+    if (TXT_M_I3_ultrasonic_distance_meter.get_distance() < 8) and (TXT_M_I2C_1_gesture_sensor.get_rgb_red() < black) and (TXT_M_I2C_1_gesture_sensor.get_rgb_green() < black) and (TXT_M_I2C_1_gesture_sensor.get_rgb_blue() < black):
+        TXT_M_M1_encodermotor.set_speed(int(0), Motor.CW)
+        TXT_M_M1_encodermotor.start()
+        TXT_M_S1_servomotor.set_position(int(256))
+        TXT_M_M1_encodermotor.set_speed(int(512), Motor.CCW)
+        TXT_M_M1_encodermotor.start()
+        time.sleep(1)
+        TXT_M_M1_encodermotor.set_speed(int(0), Motor.CCW)
+        TXT_M_M1_encodermotor.start()
+        TXT_M_M1_encodermotor.set_speed(int(512), Motor.CW)
+        TXT_M_M1_encodermotor.start()
+    TXT_M_M1_encodermotor.set_speed(int(Velocidad), Motor.CW)
+    TXT_M_M1_encodermotor.start()
+    TXT_M_S1_servomotor.set_position(int(256 + Correcion))
+    error_pas = error
+    counter = (counter if isinstance(counter, (int, float)) else 0) + 1
+    display.set_attr("txt_label.text", str(counter))
+Parking()
+
+
